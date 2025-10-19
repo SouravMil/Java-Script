@@ -1,0 +1,28 @@
+//Excercise 1
+let expenses = [250,248,587,6994,51,4596]
+let totalExpenses = expenses.reduce((sum,total)=>sum+total,0);
+console.log(totalExpenses);
+let sortedList = expenses.sort((a,b)=>a-b);
+var highest = sortedList[expenses.length-1]
+var lowest = sortedList[0]
+console.log(highest+" is the highest expense value");
+console.log(lowest+" is the lowest expense value");
+
+//Excercise 2
+console.log("=============================");
+let studentNames = ["Ram","Rahim","Insaan","CarryMinati","Bhuvan","Tanmay","Harsh","Ashis"]
+studentNames.unshift("Amit");
+studentNames.pop();
+let sortedStudents = studentNames.sort();
+console.log(sortedStudents);
+
+console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+//Excercise 3
+let productPrices = [12,25,58,56,54,965,987,125,78,36]
+let discountedPrices = productPrices.map(price=>price-(price*0.1));
+console.log(discountedPrices);
+let affordableProducts = discountedPrices.filter(discount=>discount<50);
+console.log(affordableProducts);
+let totalAffordable = affordableProducts.reduce((total,each)=>total+each,0);
+console.log(totalAffordable);
+
