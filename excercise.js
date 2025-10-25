@@ -26,3 +26,38 @@ console.log(affordableProducts);
 let totalAffordable = affordableProducts.reduce((total,each)=>total+each,0);
 console.log(totalAffordable);
 
+console.log("+++++Excercise 4 - Display current date and time+++++++++")
+//Excercise 4 - Display current date and time
+var today = new Date();
+var day = today.getDay();
+//Array of day names
+var daylist = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+//display the current day
+console.log("Today is: "+daylist[day]+".")
+//get current hour minutes and seconds
+var hour = today.getHours();
+var minutes = today.getMinutes();
+var seconds = today.getSeconds();
+//Display current time
+console.log("Current Time: "+hour+":"+minutes+":"+seconds);
+
+console.log("+++++Excercise 5 - print windown content+++++++++")
+function print_current_window()
+{
+    window.print();
+}
+
+console.log("+++++Excercise 6 - calculate area of triangle+++++++++")
+//3 sides of triangle
+var side1 = 5;
+var side2 = 6;
+var side3 = 7;
+//Using heron's formula. Calculate the semiperimeter. 
+var s = 1/2 * (side1+side2+side3);
+var area = Math.sqrt(s*(s-side1)*(s-side2)*(s-side3));
+console.log(area);
+
+console.log("+++++Excercise 7 - calculate area of triangle+++++++++")
+
+
+
