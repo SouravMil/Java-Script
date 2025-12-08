@@ -66,3 +66,23 @@ const numbers = [10, 20, 30];
 const string = numbers.map(numb=> numb.toString());
 console.log(string);
 
+console.log('11. Square all numbers');
+const nubm = [2, 4, 6, 8];
+const sq = nubm.map(n=> n*n);
+console.log(sq);
+
+console.log('12.Convert names to uppercase');
+const lowerCase = ["arjun", "priya", "sneha"];
+const upperCase = lowerCase.map(l=> l.toUpperCase());
+console.log(upperCase);
+
+console.log('13.Extract only the “name” from objects');
+const peopleInfo = [
+  { name: "Rohan", age: 28 },
+  { name: "Aditi", age: 25 },
+  { name: "Karan", age: 30 }
+];
+const onlyNames = peopleInfo.map(p=> p.name);
+console.log(onlyNames);
+
+

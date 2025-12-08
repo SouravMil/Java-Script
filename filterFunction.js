@@ -77,3 +77,22 @@ const users = [
 ];
 const gmailUser = users.filter(user=> user.email.includes('@gmail.com'));
 console.log(gmailUser);
+
+console.log('11.Filter even numbers');
+const allNumb = [1, 2, 3, 4, 5, 6];
+const evenNumb = allNumb.filter(all=> all%2 == 0);
+console.log(evenNumb);
+
+console.log('12.Filter names longer than 5 characters');
+const allNames = ["Arjun", "Riya", "Vikram", "Neha"];
+const longNames = allNames.filter(an=> an.length>5);
+console.log(longNames);
+
+console.log('13.Filter objects where age > 25');
+const empData = [
+  { name: "Priya", age: 22 },
+  { name: "Karan", age: 29 },
+  { name: "Sneha", age: 31 }
+];
+const oldEmp = empData.filter(emp=> emp.age>25);
+console.log(oldEmp);

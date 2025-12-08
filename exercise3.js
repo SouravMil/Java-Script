@@ -51,6 +51,5 @@ const students = [
   { firstName: "Bob", lastName: "Johnson" },
   { firstName: "Charlie", lastName: "Brown" }
 ];
-
 const fullNames = students.map(s=> s.firstName+' '+s.lastName);
 console.log(fullNames);
