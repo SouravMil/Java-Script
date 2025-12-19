@@ -122,3 +122,59 @@ console.log(finalString2);
 // 10. String Compression
 // Input: "aaabbccccd"
 // Output: "a3b2c4d1"
+const str3 = 'aaabbccccd';
+let rslt = '';
+let count1 =1;
+for(let i=0;i<str3.length;i++)
+{
+    if(str3[i] === str3[i+1])
+    {
+        count1++;
+    }
+    else{
+        rslt += str3[i]+count1;
+        count1 = 1;
+    };
+}
+console.log(rslt);
+
+//Count Consecutive Characters
+const Input = "aaabbcdd";
+let currentChar = Input[0];
+let count5 = 1;
+let finCount = [];
+for (let i=1;i<Input.length;i++)
+{
+    if(Input[i] === currentChar )
+    {
+        count5++;
+    }
+    else{
+        finCount.push({char:currentChar,count:count5});
+        currentChar = Input[i];
+        count5 = 1;
+    }
+}
+finCount.push({char:currentChar,count:count5});
+console.log(finCount);
+
+//Remove Consecutive Duplicates
+// Input: "aaabbccccd"
+// Output: "abcd"
+
+// //Given a binary array arr[] consisting of only 0s and 1s, 
+// find the length of the longest contiguous sequence of either 1s or 0s in the array.
+//  
+// Input: arr[] = [0, 1, 0, 1, 1, 1, 1]
+// Output: 4
+// Explanation: The maximum number of consecutive 1’s in the array is 4 from index 3-6.
+//  
+// Input: arr[] = [0, 0, 1, 0, 1, 0]
+// Output: 2
+// Explanation: The maximum number of consecutive 0’s in the array is 2 from index 0-1.
+
+
+//Remove Consecutive Duplicates
+const consecutive = 'aaabbccddeeeff';
+let consecutiveOut = [...new Set(consecutive)].join('');
+console.log(`This after removing conscutive characters ${consecutiveOut}`);
