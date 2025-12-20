@@ -173,8 +173,169 @@ console.log(finCount);
 // Output: 2
 // Explanation: The maximum number of consecutive 0’s in the array is 2 from index 0-1.
 
+const str8 = [0, 1, 0, 1, 1, 1, 1]
+let currNumb8 = str8[0];
+let count8 = 1;
+let maxcount8 = 0;
+let finalNumb8 = 0;
+
+for(let i=1;i<str8.length;i++)
+{
+    if(currNumb8 === str8[i])
+    {
+        count8++;
+    }
+    else{
+        if(count8>maxcount8)
+        {
+            maxcount8 = count8;
+            finalNumb8 = currNumb8;
+        }
+        count8 = 1;
+        currNumb8 = str8[i];
+    }
+}
+if(count8>maxcount8)
+{
+    maxcount8 = count8;
+    finalNumb8 = currNumb8;
+}
+console.log(`The longest contiguous sequence comes for ${finalNumb8}, frequency is ${maxcount8}`);
+
+//Find the set of missing numbers 
+const arr = [3, 7, 1, 4, 7, 3, 8, 1, 4, 8, 3, 7, 4];
+const arrSet = new Set(arr);
+let missingArr = [];
+
+for(let i=1;i<=9;i++)
+{
+    if(!arrSet.has(i))
+    {
+        missingArr.push(i);
+    }
+}
+console.log(missingArr);
+
 
 //Remove Consecutive Duplicates
 const consecutive = 'aaabbccddeeeff';
 let consecutiveOut = [...new Set(consecutive)].join('');
 console.log(`This after removing conscutive characters ${consecutiveOut}`);
+
+//Find the smallest missing positive number in the array
+const arr1 = [3, 4, -1, 1];
+const arr1Set = new Set(arr1);
+let finalArr = [];
+
+let smallestMissing = 1;
+
+while(arr1Set.has(smallestMissing)){
+    smallestMissing++
+}
+console.log(smallestMissing);
+
+//Find all numbers missing in a sorted range using a single loop.
+const arr2 = [1, 2, 4, 7, 8, 10];
+let arrOut2 = [];
+
+for(let i=0;i<arr2.length-1;i++)
+{
+    let curr = arr2[i];
+    let next = arr2[i+1];
+    for(let num = curr+1; num<next ; num++)
+    {
+        arrOut2.push(num);
+    }
+}
+console.log(arrOut2);
+
+//Missing Characters in Alphabet
+const str9 = "the quick brown fox";
+const ref = 'abcdefghijklmnopqrstuvwxyz';
+let resultStr9 = [];
+
+let str9Processed = str9.replaceAll(' ','').toLowerCase();
+
+const str9Set = new Set(str9Processed);
+
+for(letter of ref)
+{
+    if(!str9Set.has(letter))
+    {
+        resultStr9.push(letter)
+    }
+}
+console.log(resultStr9);
+
+//Count Missing Numbers Between Min and Max
+const arr10 = [7, 3, 10, 3, 8, 6];
+const arr10Set = new Set(arr10);
+let min = 3;
+let max = 10;
+let missingCount = 0;
+
+for(let num=min+1; num<max ; num++)
+{
+    if(!arr10Set.has(num))
+    {
+        missingCount++;
+    }
+}
+console.log(missingCount);
+
+//Find First Repeating Character in a String
+const str11 = "javascript";
+let setStr11 = new Set();
+let result = '';
+
+for(let i=0;i<str11.length;i++)
+{
+    if(setStr11.has(str11[i]))
+    {
+        result = str11[i];
+        break;
+    }
+    else{
+        setStr11.add(str11[i])
+    }
+}
+console.log(result);
+
+//First Non-Repeating Character in a String
+//Given a string, find the first character that does NOT repeat anywhere.
+const str13 = 'swiss';
+let freq = {};
+let result13 = '';
+
+for(let ch of str13)
+{
+    freq[ch] = (freq[ch] || 0) +1;
+}
+for (let ch of str13)
+{
+    if(freq[ch] === 1)
+    {
+        result13 = ch;
+        break;
+    }
+}
+console.log(result13);
+
+
+//Find All Pairs With Given Sum
+//Given an array of numbers and a target sum, find all unique pairs that add up to the target.
+const arr12 = [2, 4, 3, 5, 7, 8, 1];
+const target = 7;
+let result122 = [];
+
+for(let i=0;i<arr12.length;i++)
+{
+    for(let j=i+1;j<arr12.length;j++)
+    {
+    if(arr12[i] + arr12[j] === target)
+    {
+        result122.push([arr12[i],arr12[j]])
+    }
+}
+}
+console.log(result122);
