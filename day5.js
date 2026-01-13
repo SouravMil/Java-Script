@@ -182,8 +182,8 @@ function divisibleby5or3(arrNumb) {
 console.log(divisibleby5or3(arrNumb));
 
 //Given a positive integer n, return the count of digits in n that are even.
-//pick digit one by one using %10 and check if divisible by 2. 
-//update n using Math.floor. 
+//pick digit one by one using %10 and check if divisible by 2.
+//update n using Math.floor.
 //This entire process in a while loop.
 let n = 48291;
 function countOfEvenDigits(n) {
@@ -201,21 +201,82 @@ console.log(countOfEvenDigits(n));
 
 //Given a string, return a new string where the first and last letters of each word are swapped.
 //Keep the word order the same.
-///logic: split by (' '). loop through the words. 
+///logic: split by (' '). loop through the words.
 ///
-const inpStrng = 'hello world'
-function swappingFirstandLast(inpStrng)
-{
-    let words = inpStrng.split(' ');
-    let tempWord = '';
-    let finArr = [];
-    for(let i=0;i<words.length;i++)
-    {
-        let firstLetter = words[i][0];
-        let lastLetter = words[i][words[i].length-1];
-        tempWord = lastLetter+words[i].slice(1,words[i].length-1)+firstLetter;
-        finArr.push(tempWord);
-    }
-    return finArr.join(' ');
+const inpStrng = "hello world";
+function swappingFirstandLast(inpStrng) {
+  let words = inpStrng.split(" ");
+  let tempWord = "";
+  let finArr = [];
+  for (let i = 0; i < words.length; i++) {
+    let firstLetter = words[i][0];
+    let lastLetter = words[i][words[i].length - 1];
+    tempWord =
+      lastLetter + words[i].slice(1, words[i].length - 1) + firstLetter;
+    finArr.push(tempWord);
+  }
+  return finArr.join(" ");
 }
 console.log(swappingFirstandLast(inpStrng));
+
+//Given a positive integer n, return the sum of all prime digits in the number.
+let m = 753421;
+function sumOfAllPrimeDigits(m) {
+  let sum = 0;
+  while (m > 0) {
+    let digit = m % 10;
+    m = Math.floor(m / 10);
+    if (digit > 1) {
+      let isPrime = true;
+      for (let div = 2; div < digit; div++) {
+        if (digit % div === 0) {
+          isPrime = false;
+          break;
+        }
+      }
+      if (isPrime) sum += digit;
+    }
+  }
+  return sum;
+}
+console.log(sumOfAllPrimeDigits(m));
+
+//Given a string, return a new string where duplicate characters are removed but the original order is preserved.
+///loop through the string. 
+///a flag isSeen = false and an output string. 
+///if the character is not seen earlier, add it to the output
+const string = 'programming'
+function allUniqueChar(string)
+{
+  const charArr = string.toLowerCase().split('');
+  let outputStr = '';
+  let isSeen = {};
+  for(let char of charArr)
+  {
+    if(!isSeen[char])
+    {
+      outputStr += char;
+      isSeen[char] = true;
+    }
+  }
+  return outputStr;
+}
+console.log(allUniqueChar(string));
+
+//Given a positive integer n, return the product of all digits in the number.
+///logic: pick each digit by n%10 and update n by Math.floor
+///store it in a variable and multiple each numbers.
+///return the output
+let p = 432;
+function productOfDigits(p)
+{
+  let product = 1;
+  while(p>0)
+  {
+    let digit = p%10;
+    p = Math.floor(p/10);
+    product = product * digit;
+  }
+  return product;
+}
+console.log(productOfDigits(p))
