@@ -112,4 +112,47 @@ function sumOfAllUniquePrime(n)
 }
 console.log(sumOfAllUniquePrime(n));
 
-//
+//Given two positive integers n and k, repeatedly subtract k from n until n becomes less than k.
+//Return the final value of n.
+const m=23;
+const k=5;
+function returnMwhenlessThanK(m,k)
+{
+  while(m>k)
+  {
+    m = m-k;
+    if(k>m)
+    {
+      break;
+    }
+  }
+  return m;
+}
+console.log(returnMwhenlessThanK(m,k));
+
+//Given a positive integer n, return the count of prime digits present in n.
+const p = 2356897456321;
+function countPrimeDigits(p)
+{
+  let counter = 0;
+  while(p>0)
+  {
+    let digit = p%10;
+    p=Math.floor(p/10);
+    if(digit>1)
+    {
+      let isPrime = true;
+      for(let div=2;div<digit;div++)
+      {
+        if(digit%div === 0)
+        {
+          isPrime = false;
+          break;
+        }
+      }
+      if(isPrime) counter++;
+    }
+  }
+  return counter;
+}
+console.log(countPrimeDigits(p));
