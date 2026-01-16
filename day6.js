@@ -156,3 +156,112 @@ function countPrimeDigits(p)
   return counter;
 }
 console.log(countPrimeDigits(p));
+
+//Given a positive integer n, compute the product of all digits of n.
+///logic: pick digits one by one using N%10. Update N=Math.floor(N/10).
+///put digits in a final variable using *= methods.
+const N=245;
+function productOfDigits(N)
+{
+  let product = 1;
+  while(N>0)
+  {
+    let digit = N%10;
+    N=Math.floor(N/10);
+    product *= digit;
+  }
+  return product;
+}
+console.log(productOfDigits(N));
+
+//Given a string s, return the count of vowels in the string.
+///logic: covert string into lowerCase and split by ''.
+///loop through the array of characters and verify if character is present in vowel string
+///if yes, then increase the counter.
+const s = "Hello World";
+const vowels = 'aeiou';
+function countVowels(s,vowels)
+{
+  let counter = 0;
+  let covrtedString = s.toLowerCase().split('');
+  for(let char of covrtedString)
+  {
+    if(vowels.includes(char))
+    {
+      counter++;
+    }
+  }
+  return counter;
+}
+console.log(countVowels(s,vowels));
+
+//Given an array of integers arr, return a new array containing only the even numbers in the same order.
+///logic: loop through the array. put an if condition if number/2 and reminder ===0 then push it to an output array.
+const intArr = [3, 6, 2, 9, 10, 11];
+function arrOfEvenNumbers(intArr)
+{
+  let outputArr = [];
+  for(let i=0;i<intArr.length;i++)
+  {
+    if(intArr[i]%2 === 0)
+    {
+      outputArr.push(intArr[i]);
+    }
+  }
+  return outputArr;
+}
+console.log(arrOfEvenNumbers(intArr));
+
+//Given a positive integer n, return true if n is a prime number, otherwise return false.
+const M=1;
+function validatePrimeNumber(M)
+{
+  let isPrime = true;
+  if(M<=1) return false;
+  if(M>1)
+  {
+    for(let div=2;div<M;div++)
+    {
+      if(M%div === 0)
+      {
+        isPrime = false;
+        break;
+      }
+    }
+  }
+  return isPrime;
+}
+console.log(validatePrimeNumber(M));
+
+//Given a positive integer n, return the sum of its digits.
+const A = 5698;
+function sumOfDigits(A)
+{
+  let sum = 0;
+  while(A>0)
+  {
+    let digit = A%10;
+    A=Math.floor(A/10);
+    sum += digit;
+  }
+  return sum;
+}
+console.log(sumOfDigits(A));
+
+//Given an array of integers arr, return the maximum element in the array.
+const array = [7, 2, 10, 4];
+function largestElement(array)
+{
+  let largest = array[0];
+  for(let i=1;i<array.length;i++)
+  {
+    if(array[i]>largest)
+    {
+      largest = array[i];
+    }
+  }
+  return largest;
+}
+console.log(largestElement(array));
+
+//
