@@ -390,3 +390,50 @@ function countPrimeDigitSum(numbs) {
   return counter;
 }
 console.log(countPrimeDigitSum(numbs));
+
+//Given a positive integer n, return the number of digits in n that are prime digits.
+const l = 73529;
+function countOfPrime(l) {
+  let counter = 0;
+  while (l > 0) {
+    let digit = l % 10;
+    if (digit > 1) {
+      let isPrime = true;
+      for (let div = 2; div < digit; div++) {
+        if (digit % div === 0) {
+          isPrime = false;
+          break;
+        }
+      }
+      if (isPrime) counter++;
+    }
+    l = Math.floor(l / 10);
+  }
+  return counter;
+}
+console.log(countOfPrime(l));
+
+//Given a positive integer n, return an array with numbers that are prime from 0 to n.
+const L=73529;
+function arrayOfPrimeNumbers(L)
+{
+  let primeArr = [];
+  for(let i=0;i<=L;i++)
+  {
+    let isPrime = true;
+    if(i>1)
+    {
+      for(let div=2;div*div<=i;div++)
+      {
+        if(i%div === 0)
+        {
+          isPrime = false;
+          break;
+        }
+      }
+      if(isPrime) primeArr.push(i);
+    }
+  }
+  return primeArr;
+}
+console.log(arrayOfPrimeNumbers(L));
