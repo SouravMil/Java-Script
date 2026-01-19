@@ -287,3 +287,106 @@ function greaterThanAvg(numArray) {
   return newArray;
 }
 console.log(greaterThanAvg(numArray));
+
+//Given an array of integers arr, return the second largest element in the array.
+///Loop through the array. Create variables 'largest' and '2ndLargest' and initiate at -Infinity
+///create if condition, largest<arr[0] then 2ndLargest = largest and largest = arr[0]
+///another if condition, if number>2ndLargest and number<largest then 2ndLargest = arr[i]
+const arrNumb = [4, 7, 1, 9, 3];
+function secondLargest(arrNumb) {
+  let largest = -Infinity;
+  let secLargest = -Infinity;
+  for (let i = 0; i < arrNumb.length; i++) {
+    if (arrNumb[i] > largest) {
+      secLargest = largest;
+      largest = arrNumb[i];
+    } else if (arrNumb[i] > secLargest && arrNumb[i] < largest) {
+      secLargest = arrNumb[i];
+    }
+  }
+  return secLargest;
+}
+console.log(secondLargest(arrNumb));
+
+//Given a positive integer n, return the sum of the digits of n.
+///logic: collect each digits by %10 and update g using Match.floor.
+///add each individual digits to a variable and return the variable at the end
+const g = 4927;
+function sumOfAllDigits(g) {
+  let sum = 0;
+  while (g > 0) {
+    let digit = g % 10;
+    g = Math.floor(g / 10);
+    sum += digit;
+  }
+  return sum;
+}
+console.log(sumOfAllDigits(g));
+
+//Given a string s, return true if the string is a palindrome (reads the same forward and backward), and false otherwise.
+//Ignore case while checking.
+const str = "Level";
+function checkingPalindrome(str) {
+  let lowerStr = str.toLowerCase();
+  let splitted = lowerStr.split("");
+  let rev = [];
+  for (let i = splitted.length - 1; i >= 0; i--) {
+    rev.push(splitted[i]);
+  }
+  return rev.join("") === lowerStr;
+}
+console.log(checkingPalindrome(str));
+
+//Given an array of positive integers arr and a positive integer k,
+//return a new array containing all numbers from arr whose sum of digits is strictly greater than k.
+const arrIn = [34, 52, 19, 8, 123];
+const K = 7;
+function filterByDigitSum(arrIn, K) {
+  let outArr = [];
+  for (let i = 0; i < arrIn.length; i++) {
+    let num = arrIn[i];
+    let sum = 0;
+    if (arrIn[i] > 0) {
+      while (num > 0) {
+        let digit = num % 10;
+        num = Math.floor(num / 10);
+        sum += digit;
+      }
+    }
+    if (sum > K) {
+      outArr.push(arrIn[i]);
+    }
+  }
+  return outArr;
+}
+console.log(filterByDigitSum(arrIn, K));
+
+//Given an array of positive integers arr, return the count of numbers whose sum of digits is a prime number.
+///Logic: loop through the array
+///collect digit by %10 and get sum of all the digits
+///if the sum is prime then increase counter;
+const numbs = [23, 41, 58, 7, 999, 13];
+function countPrimeDigitSum(numbs) {
+  let counter = 0;
+  for (let i = 0; i < numbs.length; i++) {
+    let digitSum = 0;
+    let n = numbs[i];
+    while (n > 0) {
+      let digit = n % 10;
+      digitSum += digit;
+      n = Math.floor(n / 10);
+    }
+    if (digitSum > 1) {
+      let isPrime = true;
+      for (let div = 2; div < digitSum; div++) {
+        if (digitSum % div === 0) {
+          isPrime = false;
+          break;
+        }
+      }
+      if (isPrime) counter++;
+    }
+  }
+  return counter;
+}
+console.log(countPrimeDigitSum(numbs));
