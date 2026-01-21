@@ -77,20 +77,91 @@ function validateSumisPrime(p) {
   while (p > 0) {
     let digit = p % 10;
     sum += digit;
-    p=Math.floor(p/10);
+    p = Math.floor(p / 10);
   }
-  if(sum > 1)
-  {
+  if (sum > 1) {
     isPrime = true;
-    for(let div=2;div<sum;div++)
-    {
-        if(sum%div === 0)
-        {
-            isPrime = false;
-            break;
-        }
+    for (let div = 2; div < sum; div++) {
+      if (sum % div === 0) {
+        isPrime = false;
+        break;
+      }
     }
   }
   return isPrime;
 }
 console.log(validateSumisPrime(p));
+
+//Given a string s, return the character that appears the most number of times.
+//If multiple characters tie for max frequency, return any one of them.
+const strInp = "xyzyz";
+function mostAppearedChar(strInp) {
+  const lowerStr = strInp.toLowerCase();
+  let freq = {};
+  for (let char of lowerStr) {
+    freq[char] = (freq[char] || 0) + 1;
+  }
+  let maxFreq = 0;
+  let outChar = "";
+  for (let char in freq) {
+    if (freq[char] > maxFreq) {
+      maxFreq = freq[char];
+      outChar = char;
+    } else if (freq[char] === maxFreq) {
+      outChar += char;
+    }
+  }
+  return outChar;
+}
+console.log(mostAppearedChar(strInp));
+
+//Given an integer array, return the length of the longest consecutive increasing sequence of numbers.
+///Logic: loop through the array
+///check if next number = previous +1
+///if next number is missing then log the length
+///return max length at the end
+const numArr = [1, 2, 3, 10, 11, 12, 13, 90];
+function longestConsecLength(numArr) {
+  let maxLength = 1;
+  let length = 1;
+  for (let i = 0; i < numArr.length; i++) {
+    if (numArr[i + 1] === numArr[i] + 1) {
+      length++;
+    } else {
+      if (length > maxLength) {
+        maxLength = length;
+      }
+      length = 1;
+    }
+  }
+  if(length>maxLength)
+  {
+    maxLength = length;
+  }
+  return maxLength;
+}
+console.log(longestConsecLength(numArr));
+
+//Given a string s, return a new string where all characters that appear more than once are removed, 
+//keeping the order of the remaining characters.
+///Logic: get frequencies of all the characters
+///insert those characters in output whose frequency ===1
+const stringInp = 'programming'
+function onlyUniqueCharacters(stringInp)
+{
+  let freq = {};
+  let outString = '';
+  for(let char of stringInp)
+  {
+    freq[char] = (freq[char] || 0) + 1
+  }
+  for(let char of stringInp)
+  {
+    if(freq[char] === 1)
+    {
+      outString += char;
+    }
+  }
+  return outString;
+}
+console.log(onlyUniqueCharacters(stringInp));
