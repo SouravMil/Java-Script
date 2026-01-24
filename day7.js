@@ -134,34 +134,131 @@ function longestConsecLength(numArr) {
       length = 1;
     }
   }
-  if(length>maxLength)
-  {
+  if (length > maxLength) {
     maxLength = length;
   }
   return maxLength;
 }
 console.log(longestConsecLength(numArr));
 
-//Given a string s, return a new string where all characters that appear more than once are removed, 
+//Given a string s, return a new string where all characters that appear more than once are removed,
 //keeping the order of the remaining characters.
 ///Logic: get frequencies of all the characters
 ///insert those characters in output whose frequency ===1
-const stringInp = 'programming'
-function onlyUniqueCharacters(stringInp)
-{
+const stringInp = "programming";
+function onlyUniqueCharacters(stringInp) {
   let freq = {};
-  let outString = '';
-  for(let char of stringInp)
-  {
-    freq[char] = (freq[char] || 0) + 1
+  let outString = "";
+  for (let char of stringInp) {
+    freq[char] = (freq[char] || 0) + 1;
   }
-  for(let char of stringInp)
-  {
-    if(freq[char] === 1)
-    {
+  for (let char of stringInp) {
+    if (freq[char] === 1) {
       outString += char;
     }
   }
   return outString;
 }
 console.log(onlyUniqueCharacters(stringInp));
+
+//Given a string s, return the character that has the 2nd highest frequency in the string.
+//If there is no such character (example: all characters appear equally), return null
+///logic: count the freq of all the characters
+///check freq object again and get the character that is lesser than largest but greater than smallest
+const strn = "banana";
+function secondHighestFreq(strn) {
+  let freq = {};
+  for (let char of strn) {
+    freq[char] = (freq[char] || 0) + 1;
+  }
+  let maxFreq = 0;
+  let secMaxFreq = 0;
+  let secMaxChar = null;
+  for (let char of strn) {
+    if (freq[char] > maxFreq) {
+      secMaxFreq = maxFreq;
+      maxFreq = freq[char];
+      secMaxChar = null;
+    } else if (maxFreq > freq[char] && freq[char] > secMaxFreq) {
+      secMaxFreq = freq[char];
+      secMaxChar = char;
+    }
+  }
+  return secMaxChar;
+}
+console.log(secondHighestFreq(strn));
+
+//Given a positive integer n, return a new integer formed by reversing its digits.
+///logic: pick digit one by one and put it in a variable using reverse loop
+const h = 45021;
+function reverseDigits(h) {
+  let revNum = 0;
+  while (h > 0) {
+    let digit = h % 10;
+    revNum = revNum * 10 + digit;
+    h = Math.floor(h / 10);
+  }
+  return revNum;
+}
+console.log(reverseDigits(h));
+
+//Given a positive integer n, return an array of all prime numbers from 1 to n (inclusive).
+const N = 12;
+function arrayOfPrime(N) {
+  let primeArr = [];
+  for (let i = 0; i <= N; i++) {
+    if (i > 1) {
+      let isPrime = true;
+      for (let div = 2; div < i; div++) {
+        if (i % div === 0) {
+          isPrime = false;
+          break;
+        }
+      }
+      if (isPrime) primeArr.push(i);
+    }
+  }
+  return primeArr;
+}
+console.log(arrayOfPrime(N));
+
+//Given a number N, count how many digits are even and how many digits are odd.
+///logic: pick digit one by one using %10
+///if the digit%2 === 0 then increase even else odd
+const numInp = 4827;
+function counterOddEven(numInp) {
+  let odd = 0;
+  let even = 0;
+  while (numInp > 0) {
+    let digit = numInp % 10;
+    if (digit % 2 === 0) {
+      even++;
+    } else {
+      odd++;
+    }
+    numInp = Math.floor(numInp / 10);
+  }
+  return { even, odd };
+}
+console.log(counterOddEven(numInp));
+
+//Detect the maximum consecutive
+const bin = [0, 0, 0, 1, 1, 1, 1, 0, 0, 1];
+function maximumRepeated(bin) {
+  let count = 1;
+  let maxCount = 0;
+  let current = bin[0];
+  for (let i = 1; i < bin.length; i++) {
+    if (bin[i] === current) {
+      count++;
+    } else {
+      if (count > maxCount) {
+        maxCount = count;
+      }
+      count = 1;
+      current = bin[i];
+    }
+  }
+  return maxCount;
+}
+console.log(maximumRepeated(bin));
