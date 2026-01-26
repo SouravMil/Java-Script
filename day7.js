@@ -262,3 +262,128 @@ function maximumRepeated(bin) {
   return maxCount;
 }
 console.log(maximumRepeated(bin));
+
+//Given a string s, return the first non-repeating character.
+//If no such character exists, return null.
+///logic:
+const exStrn = "swiss";
+function firstNonrepeating(exStrn) {
+  let nonRepeat = null;
+  let freq = {};
+  for (let char of exStrn) {
+    freq[char] = (freq[char] || 0) + 1;
+  }
+  for (let char of exStrn) {
+    if (freq[char] === 1) {
+      nonRepeat = char;
+      break;
+    }
+  }
+  return nonRepeat;
+}
+console.log(firstNonrepeating(exStrn));
+
+//Given an integer array nums, return a new array containing only the local maxima.
+///logic: loop through the array starting from index = 1
+///put a condition if the number is greater than previous and next number
+///push the number in a separate array
+const inp = [1, 3, 2, 5, 4, 7, 7, 2];
+function localMaxima(inp) {
+  let localMax = [];
+  for (let i = 1; i < inp.length - 1; i++) {
+    if (inp[i] > inp[i - 1] && inp[i] > inp[i + 1]) {
+      localMax.push(inp[i]);
+    }
+  }
+  return localMax;
+}
+console.log(localMaxima(inp));
+
+//Given an integer n, return the sum of all prime numbers from 1 to n.
+const u = 12;
+function sumOfPrimes(u) {
+  let primeSum = 0;
+  for (let i = 2; i <= u; i++) {
+    let isPrime = true;
+    for (let div = 2; div * div <= i; div++) {
+      if (i % div === 0) {
+        isPrime = false;
+        break;
+      }
+    }
+    if (isPrime) primeSum += i;
+  }
+  return primeSum;
+}
+console.log(sumOfPrimes(u));
+
+//Given a string s, return true if the string is a palindrome
+//ignoring case and non-alphanumeric characters. Otherwise return false.
+const input = "A man, a plan, a canal: Panama";
+function palindromeString(input) {
+  const newInput = input
+    .toLowerCase()
+    .replaceAll(",", "")
+    .replace(":", "")
+    .replaceAll(" ", "");
+  return newInput === newInput.split("").reverse().join("");
+}
+console.log(palindromeString(input));
+
+//Given a number n, return the count of digits that are prime (2,3,5,7).
+const P = 453722;
+function primeCount(P) {
+  let counter = 0;
+  while (P > 0) {
+    let digit = P % 10;
+    let isPrime = true;
+    if (digit > 1) {
+      for (let div = 2; div < digit; div++) {
+        if (digit % div === 0) {
+          isPrime = false;
+          break;
+        }
+      }
+      if (isPrime) counter++;
+    }
+    P = Math.floor(P / 10);
+  }
+  return counter;
+}
+console.log(primeCount(P));
+
+//Given a string s, return the longest word in the string.
+//If multiple words have the same longest length, return any one of them.
+const inpString = 'Js makes sense'
+function longestWord(inpString)
+{
+  const strArr = inpString.split(' ');
+  let longest = strArr[0];
+  for(let i=1;i<strArr.length;i++)
+  {
+    if(strArr[i].length>longest.length)
+    {
+      longest = strArr[i];
+    }
+  }
+  return longest;
+}
+console.log(longestWord(inpString));
+
+//Given an integer array arr, return true if the array is strictly increasing, otherwise return false.
+const numbArr = [1,3,5,4];
+function integerIncrement(numbArr)
+{
+  let incremental = true;
+  for(let i=0;i<numbArr.length-1;i++)
+  {
+    if(numbArr[i+1]<=numbArr[i])
+    {
+      incremental = false;
+      break;
+    }
+  }
+  return incremental;
+}
+console.log(integerIncrement(numbArr))
+
