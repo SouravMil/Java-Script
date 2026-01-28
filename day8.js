@@ -140,3 +140,68 @@ function mostFrequentChar(str)
     return mostFrequentChar;
 }
 console.log(mostFrequentChar(str));
+
+//Given a number n, return true if it is an Armstrong number.
+//Definition reminder:
+// A number is called an Armstrong number if:
+// Sum of (each digit raised to the power of number of digits) = original number
+const int = 153;
+function validateArmstrongNumber(int)
+{
+    let num = int;
+    let outPut = 0;
+    const digitCount = int.toString().length;
+    while(num>0)
+    {
+        let digit = num%10;
+        outPut = outPut+Math.pow(digit,digitCount);
+        num=Math.floor(num/10);
+    }
+    return outPut === int ;
+}
+console.log(validateArmstrongNumber(int));
+
+//Given a string s, return a new string with the characters in alternating case.
+const string = 'hello world'
+function charsAlternateCase(string)
+{
+    const charArr = string.split('')
+    let outArr = [];
+    let count = 0;
+    for(let i=0;i<charArr.length;i++)
+    {
+        if(charArr[i] === ' ')
+        {
+            outArr.push(' ');
+            continue;
+        }
+        if(count%2 === 0)
+        {
+            outArr.push(charArr[i].toLowerCase());
+        }
+        else{
+            outArr.push(charArr[i].toUpperCase());
+        }
+        count++;
+    }
+    return outArr.join('');
+}
+console.log(charsAlternateCase(string));
+
+//Given an integer n, return the sum of all even digits of n.
+const inp = 48291;
+function evenDigitsSum(inp)
+{
+    let evenSum = 0;
+    while(inp>0)
+    {
+        let digit = inp%10;
+        if(digit%2 === 0)
+        {
+            evenSum += digit;
+        }
+        inp=Math.floor(inp/10);
+    }
+    return evenSum;
+}
+console.log(evenDigitsSum(inp));
