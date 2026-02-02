@@ -167,17 +167,20 @@ let newList = [];
 list.forEach((obj) => {
   let row = {};
 
-  Object.entries(obj).forEach(([key, value]) => {
+   //Object.entries(obj).forEach(([key, value]) => {
     const priceNum = Number(obj.price);
     row.price = isNaN(priceNum) ? null : priceNum;
 
     row.qty = Number(obj.qty);
     newList.push(row);
-  });
+  //});
 });
+console.log('checking Object');
 console.log(newList);
 // Convert:
 // price → number (invalid → 0)
+
+
 // qty → number
 // add new field total = price * qty
 

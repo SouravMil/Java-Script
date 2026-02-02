@@ -281,3 +281,143 @@ function secondLargest(arrNum) {
   return secLargest === -Infinity ? null : secLargest;
 }
 console.log(secondLargest(arrNum));
+
+//Total order amount for each user. Highest spender, return separate array for no spender
+const users = [
+  { id: 1, name: "Rahul", orders: [1200, 3400, 460] },
+  { id: 2, name: "Anita", orders: [99, 299] },
+  { id: 3, name: "Karan", orders: [] },
+  { id: 4, name: "Neha", orders: [1200, 5000, 8000] },
+];
+function multipleUsersExpense(users) {
+  let orderTotal = {};
+  let noSpender = [];
+  let highestSpender = { name: null, amount: 0 };
+  users.forEach((element) => {
+    if (element.orders.length === 0) {
+      noSpender.push(element);
+    } else {
+      orderTotal[element.name] = element.orders.reduce(
+        (sum, curr) => sum + curr,
+        0,
+      );
+    }
+  });
+  for (let obj in orderTotal) {
+    if (orderTotal[obj] > highestSpender.amount) {
+      highestSpender.amount = orderTotal[obj];
+      highestSpender.name = obj;
+    }
+  }
+  return { orderTotal, noSpender, highestSpender };
+}
+console.log(multipleUsersExpense(users));
+
+//Given an array of integers, return a new array where each element is the sum of all elements to its right.
+//For the last element, the sum should be 0.
+const intInp = [1, 2, 3, 4];
+function sumElementArr(intInp) {
+  let outputArr = [];
+  let outSum = 0;
+  for (let j = intInp.length - 1; j >= 0; j--) {
+    outputArr[j] = outSum;
+    outSum += intInp[j];
+  }
+  return outputArr;
+}
+console.log(sumElementArr(intInp));
+
+//Given an array of integers, 
+//return true if the array can be made strictly increasing by removing at most ONE element. Otherwise, return false.
+const arr = [1,2,1,4]
+function validateIncreasingArr(arr)
+{
+  let failCount = 0;
+  for(let i=0;i<arr.length-1;i++)
+  {
+    if(arr[i]>=arr[i+1])
+    {
+      failCount++;
+      if(failCount>1) return false;
+      if(i>0 && arr[i-1]>=arr[i+1])
+      {
+        arr[i+1] = arr[i];
+      }
+    }
+  }
+  return true;
+}
+console.log(validateIncreasingArr(arr));
+
+//Given an array of integers, return the index of the FIRST element that breaks the strictly increasing order.
+//If the array is strictly increasing, return -1.
+const arrNumb = [1,3,2,4,5];
+function firstBreakElementinOrder(arrNumb)
+{
+  let failIndex = -1;
+  for(let i=0;i<arrNumb.length-1;i++)
+  {
+    if(arrNumb[i]>=arrNumb[i+1])
+    {
+      failIndex = i;
+      break;
+    }
+  }
+  return failIndex;
+}
+console.log(firstBreakElementinOrder(arrNumb));
+
+//Given an array of integers, return the length of the longest strictly increasing contiguous subarray.
+//Contiguous = elements must be next to each other.
+const exArr = [1, 2, 3, 2, 3, 4, 5];
+function longestIncrementalArr(exArr)
+{
+  let counter = 1;
+  let longest = 0;
+  for(let i=0;i<exArr.length-1;i++)
+  {
+    let subarray = [];
+    if(exArr[i]<exArr[i+1])
+    {
+      counter++;
+    }
+    else{
+      if(subarray.length>longest)
+      {
+      longest = counter;
+      }
+      counter = 1;
+    }
+  }
+  if(counter>longest)
+  {
+    longest = counter;
+  }
+  return longest;
+}
+console.log(longestIncrementalArr(exArr));
+
+//Given a string s, return true if the string can be made 
+//an isogram by removing at most ONE character. Otherwise return false.
+const exStrn = 'programe';
+function validateIsogrambyremovingChar(exStrn)
+{
+  let frequency = {};
+  for(let char of exStrn)
+  {
+    frequency[char] = (frequency[char]||0)+1
+  }
+  let extra = 0;
+  for(let char in frequency)
+  {
+    extra += frequency[char] - 1;
+    if(extra>1)
+    {
+      return false;
+    }
+  }
+  return true;
+}
+console.log(validateIsogrambyremovingChar(exStrn));
+
+//94
