@@ -327,21 +327,17 @@ function sumElementArr(intInp) {
 }
 console.log(sumElementArr(intInp));
 
-//Given an array of integers, 
+//Given an array of integers,
 //return true if the array can be made strictly increasing by removing at most ONE element. Otherwise, return false.
-const arr = [1,2,1,4]
-function validateIncreasingArr(arr)
-{
+const arr = [1, 2, 1, 4];
+function validateIncreasingArr(arr) {
   let failCount = 0;
-  for(let i=0;i<arr.length-1;i++)
-  {
-    if(arr[i]>=arr[i+1])
-    {
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] >= arr[i + 1]) {
       failCount++;
-      if(failCount>1) return false;
-      if(i>0 && arr[i-1]>=arr[i+1])
-      {
-        arr[i+1] = arr[i];
+      if (failCount > 1) return false;
+      if (i > 0 && arr[i - 1] >= arr[i + 1]) {
+        arr[i + 1] = arr[i];
       }
     }
   }
@@ -351,14 +347,11 @@ console.log(validateIncreasingArr(arr));
 
 //Given an array of integers, return the index of the FIRST element that breaks the strictly increasing order.
 //If the array is strictly increasing, return -1.
-const arrNumb = [1,3,2,4,5];
-function firstBreakElementinOrder(arrNumb)
-{
+const arrNumb = [1, 3, 2, 4, 5];
+function firstBreakElementinOrder(arrNumb) {
   let failIndex = -1;
-  for(let i=0;i<arrNumb.length-1;i++)
-  {
-    if(arrNumb[i]>=arrNumb[i+1])
-    {
+  for (let i = 0; i < arrNumb.length - 1; i++) {
+    if (arrNumb[i] >= arrNumb[i + 1]) {
       failIndex = i;
       break;
     }
@@ -370,49 +363,39 @@ console.log(firstBreakElementinOrder(arrNumb));
 //Given an array of integers, return the length of the longest strictly increasing contiguous subarray.
 //Contiguous = elements must be next to each other.
 const exArr = [1, 2, 3, 2, 3, 4, 5];
-function longestIncrementalArr(exArr)
-{
+function longestIncrementalArr(exArr) {
   let counter = 1;
   let longest = 0;
-  for(let i=0;i<exArr.length-1;i++)
-  {
+  for (let i = 0; i < exArr.length - 1; i++) {
     let subarray = [];
-    if(exArr[i]<exArr[i+1])
-    {
+    if (exArr[i] < exArr[i + 1]) {
       counter++;
-    }
-    else{
-      if(subarray.length>longest)
-      {
-      longest = counter;
+    } else {
+      if (subarray.length > longest) {
+        longest = counter;
       }
       counter = 1;
     }
   }
-  if(counter>longest)
-  {
+  if (counter > longest) {
     longest = counter;
   }
   return longest;
 }
 console.log(longestIncrementalArr(exArr));
 
-//Given a string s, return true if the string can be made 
+//Given a string s, return true if the string can be made
 //an isogram by removing at most ONE character. Otherwise return false.
-const exStrn = 'programe';
-function validateIsogrambyremovingChar(exStrn)
-{
+const exStrn = "programe";
+function validateIsogrambyremovingChar(exStrn) {
   let frequency = {};
-  for(let char of exStrn)
-  {
-    frequency[char] = (frequency[char]||0)+1
+  for (let char of exStrn) {
+    frequency[char] = (frequency[char] || 0) + 1;
   }
   let extra = 0;
-  for(let char in frequency)
-  {
+  for (let char in frequency) {
     extra += frequency[char] - 1;
-    if(extra>1)
-    {
+    if (extra > 1) {
       return false;
     }
   }
@@ -420,4 +403,146 @@ function validateIsogrambyremovingChar(exStrn)
 }
 console.log(validateIsogrambyremovingChar(exStrn));
 
-//94
+//Given an array of integers, return true if there exists an index such that the sum of elements on the left
+//is equal to the sum of elements on the right. Otherwise return false.
+//The element at the index itself is not included in either sum.
+const numbArr = [2, 1, -1];
+function leftsumEqualrightsum(numbArr) {
+  //rightsum = total - leftsum - current;
+  //rightsum = 28 - 11 - 6
+  let rightSum = 0;
+  let leftSum = 0;
+  const totalSum = numbArr.reduce((curr, nxt) => curr + nxt, 0);
+  for (let i = 0; i < numbArr.length; i++) {
+    let current = numbArr[i];
+    rightSum = totalSum - leftSum - current;
+    if (rightSum === leftSum) {
+      return true;
+    }
+    leftSum += numbArr[i];
+  }
+  return false;
+}
+console.log(leftsumEqualrightsum(numbArr));
+
+//Given an integer n, return true if n is a happy number, otherwise return false.
+// //A number is happy if:
+// Replace the number by the sum of squares of its digits
+// Repeat the process
+// If it eventually becomes 1 → ✅ happy
+// If it enters a loop (never reaches 1) → ❌ not happy
+const p = 19;
+function validateHappyNumber(p) {
+  let num = p;
+  let seen = {};
+  while (num !== 1) {
+    if (seen[num]) return false;
+    seen[num] = true;
+    let sum = 0;
+    while (num > 0) {
+      let digit = num % 10;
+      sum += Math.pow(digit, 2);
+      num = Math.floor(num / 10);
+    }
+    num = sum;
+    //console.log('testing loop'+num);
+  }
+  return true;
+}
+console.log(validateHappyNumber(p));
+
+//Given a string s, return the first character that appears exactly once.
+//If no such character exists, return null.
+const strng = "leetcode";
+function firstUniqueCharacter(strng) {
+  let seen = {};
+  for (let char of strng) {
+    seen[char] = (seen[char] || 0) + 1;
+  }
+  for (let char of strng) {
+    if (seen[char] === 1) {
+      return char;
+    }
+  }
+  return null;
+}
+console.log(firstUniqueCharacter(strng));
+
+//Given an array of integers, return true if there exists a pair of numbers whose sum equals
+//a given target. Otherwise return false.
+//You cannot use the same element twice.
+const nums = [2, 7, 11, 15];
+const target = 9;
+function pairSumExist(nums, target) {
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      if (target === nums[i] + nums[j]) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+console.log(pairSumExist(nums, target));
+
+//Check whether a given number is a “Strong Number”.
+const num = 145;
+function validateStrongNumber(num) {
+  let p = num;
+  let prodSum = 0;
+  while (p > 0) {
+    let prod = 1;
+    let digit = p % 10;
+    for (let i = digit; i > 0; i--) {
+      prod = prod * i;
+    }
+    prodSum += prod;
+    p = Math.floor(p / 10);
+  }
+  return num === prodSum;
+}
+console.log(validateStrongNumber(num));
+
+//Find the second largest element in an array without sorting it.
+const inpArr = [-5, -1, -10];
+function secondLargest(inpArr)
+{
+  let largest = -Infinity;
+  let secLargest = -Infinity;
+  for(let i=0;i<inpArr.length;i++)
+  {
+    if(inpArr[i]>largest)
+    {
+      secLargest = largest;
+      largest = inpArr[i];
+    }
+    else if(inpArr[i]>secLargest && inpArr[i]<largest)
+    {
+      secLargest = inpArr[i];
+    }
+  }
+  return secLargest;
+}
+console.log(secondLargest(inpArr));
+
+//Find the first non-repeating character in a given string.
+const Input = "stress";
+function firstNonRepeatingChar(Input)
+{
+  let seen = {};
+  for(let char of Input)
+  {
+    seen[char] = (seen[char]||0)+1
+  }
+  for(let char of Input)
+  {
+    if(seen[char] === 1)
+    {
+      return char;
+    }
+  }
+  return null;
+}
+console.log(firstNonRepeatingChar(Input));
+
+//101
