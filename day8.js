@@ -545,4 +545,4 @@ function firstNonRepeatingChar(Input)
 }
 console.log(firstNonRepeatingChar(Input));
 
-//101
+
