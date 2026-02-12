@@ -1,16 +1,14 @@
-let input = prompt("enter your message");
-function getSpecificAlert(userInput) 
+const inp = [1,2,3,4]
+//op = [1,3,6,10]
+function desiredOutput(inp)
 {
-    let lowerInput = userInput.toLowerCase();
-    if (lowerInput === "hi") 
+    let out = [inp[0]];
+     let sum = 1;
+    for(let i=1;i<=inp.length-1;i++)
     {
-        return "Hello";
-    }
-    else if (lowerInput === "thank you")
-    {
-        return "You're welcome!";
-    }
-    else {return "invalid input"}
+       sum += inp[i];
+       out.push(sum);
+    } 
+    return out;
 }
-alert(getSpecificAlert(input));
-
+console.log(desiredOutput(inp));

@@ -152,4 +152,39 @@ function longestCommonPrefix(strArr)
 }
 console.log(longestCommonPrefix(strArr));
 
-//108
+//Rotate an array to the right by k steps
+///Logic: 
+// You got it 🙂 — just a tiny directional hint, nothing more.
+// 👉 Hint:
+// Think of the array as two parts:
+// the last k elements
+// the remaining first part
+// After rotation:
+// the last k elements come to the front
+// the first part moves to the end
+// Also keep in mind:
+// if k is bigger than array length → reduce it using
+const   array = [1, 2, 3, 4, 5] 
+const k = 2
+function rotateArray(array,k)
+{
+  function arrayOpr(arr,start,end)
+  {
+    while(start<end)
+    {
+      [arr[start],arr[end]] = [arr[end],arr[start]];
+      start++;
+      end--;
+    }
+  }
+  k%=array.length;
+
+  arrayOpr(array,0,(array.length-1));
+  arrayOpr(array,0,(k-1));
+  arrayOpr(array,k,(array.length - 1));
+
+  return array;
+}
+console.log(rotateArray(array,k));
+
+//
