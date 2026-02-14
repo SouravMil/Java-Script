@@ -1,170 +1,141 @@
 //Rotate an array to the LEFT by k steps
-const arr =  [1, 2, 3, 4, 5] 
+const arr = [1, 2, 3, 4, 5];
 //5,4,3,2,1  //3,4,5,1,2
 const k = 2;
-function rotateToLeft(arr,k)
-{
-    //helper function
-    function arrOpr(array,start,end)
-    {
-        while(start<end)
-        {
-            [array[start],array[end]] = [array[end],array[start]];
-            start++;
-            end--;
-        }
+function rotateToLeft(arr, k) {
+  //helper function
+  function arrOpr(array, start, end) {
+    while (start < end) {
+      [array[start], array[end]] = [array[end], array[start]];
+      start++;
+      end--;
     }
-    k%= arr.length;
-    arrOpr(arr,0,k-1);
-    arrOpr(arr,k,(arr.length-1));
-    arrOpr(arr,0,(arr.length-1));
-    
+  }
+  k %= arr.length;
+  arrOpr(arr, 0, k - 1);
+  arrOpr(arr, k, arr.length - 1);
+  arrOpr(arr, 0, arr.length - 1);
 
-    return arr;
+  return arr;
 }
-console.log(rotateToLeft(arr,k));
+console.log(rotateToLeft(arr, k));
 
 //Find the length of the longest substring without repeating characters
 const str = "abcabcbb";
-function longestSubstring(str)
-{
-    let maxLength = 0;
-    
-    for(let i=0;i<str.length;i++)
-    {
-        let map = {};
-        let currentLength = 0;
-        for(let j=i;j<str.length;j++)
-        {
-            let char = str[j];
-            if(map[char])
-            {
-                break;
-            }
-            map[char] = true;
-            currentLength++;
-        }
-        maxLength = Math.max(maxLength, currentLength);
+function longestSubstring(str) {
+  let maxLength = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    let map = {};
+    let currentLength = 0;
+    for (let j = i; j < str.length; j++) {
+      let char = str[j];
+      if (map[char]) {
+        break;
+      }
+      map[char] = true;
+      currentLength++;
     }
-    return maxLength;
+    maxLength = Math.max(maxLength, currentLength);
+  }
+  return maxLength;
 }
 console.log(longestSubstring(str));
 
 //Find the element that appears most frequently in an array
-const numArr =  [1, 3, 2, 3, 4, 3, 5, 2];
-function mostFrequentElement(numArr)
-{
-    let freq = {};
-    for(let num of numArr)
-    {
-        freq[num] = (freq[num]||0)+1;
+const numArr = [1, 3, 2, 3, 4, 3, 5, 2];
+function mostFrequentElement(numArr) {
+  let freq = {};
+  for (let num of numArr) {
+    freq[num] = (freq[num] || 0) + 1;
+  }
+  let mostFreq = 0;
+  let maxFreq = 0;
+  for (let num of numArr) {
+    if (freq[num] > maxFreq) {
+      maxFreq = freq[num];
+      mostFreq = num;
     }
-    let mostFreq = 0;
-    let maxFreq = 0;
-    for(let num of numArr)
-    {
-        if(freq[num]>maxFreq)
-        {
-            maxFreq = freq[num];
-            mostFreq = num;
-        }
-    }
-    return mostFreq;
+  }
+  return mostFreq;
 }
-console.log(mostFrequentElement(numArr))
+console.log(mostFrequentElement(numArr));
 
 //Find the product of all elements in an array except the current element
 const numb = [1, 2, 3, 4];
-function productOfElements(numb)
-{
-    let outNumb = [];
-    for(let i=0;i<numb.length;i++)
-    {
-        let product = 1;
-       for(let j=0;j<numb.length;j++)
-       {
-        if(i !== j)
-        {
-            product *= numb[j];
-        }
-       }
-       outNumb.push(product);
+function productOfElements(numb) {
+  let outNumb = [];
+  for (let i = 0; i < numb.length; i++) {
+    let product = 1;
+    for (let j = 0; j < numb.length; j++) {
+      if (i !== j) {
+        product *= numb[j];
+      }
     }
-    return outNumb;
+    outNumb.push(product);
+  }
+  return outNumb;
 }
 console.log(productOfElements(numb));
 
 //Given an array, move all 0s to the end without changing the order of non-zero elements.
 const exArr = [0, 1, 0, 3, 12];
-function shiftAllZeros(exArr)
-{
-    let map = {};
-    for(let num of exArr)
-    {
-        map[num] = (map[num]||0)+1
+function shiftAllZeros(exArr) {
+  let map = {};
+  for (let num of exArr) {
+    map[num] = (map[num] || 0) + 1;
+  }
+  let outPut = [];
+  for (let num of exArr) {
+    if (num !== 0) {
+      outPut.push(num);
     }
-    let outPut = [];
-    for(let num of exArr)
-    {
-        if(num !== 0)
-        {
-            outPut.push(num);
-        }
-    }
-    for(let i=0;i<(map[0]||0);i++)
-    {
-        outPut.push(0);
-    }
-    return outPut;
+  }
+  for (let i = 0; i < (map[0] || 0); i++) {
+    outPut.push(0);
+  }
+  return outPut;
 }
 console.log(shiftAllZeros(exArr));
 
 //Find the longest word in a given sentence.
-const inp = "I am learning JavaScript daily"
-function longestWord(inp)
-{
-    const inpArr = inp.split(' ');
-    let longest = inpArr[0];
-    for(let i=1;i<inpArr.length;i++)
-    {
-        if(inpArr[i].length>longest.length)
-        {
-            longest = inpArr[i];
-        }
+const inp = "I am learning JavaScript daily";
+function longestWord(inp) {
+  const inpArr = inp.split(" ");
+  let longest = inpArr[0];
+  for (let i = 1; i < inpArr.length; i++) {
+    if (inpArr[i].length > longest.length) {
+      longest = inpArr[i];
     }
-    return longest;
+  }
+  return longest;
 }
 console.log(longestWord(inp));
 
 //Check whether a number is a Perfect Number
-const n=28;
-function validatePerfectNumb(n)
-{
-    let div = 1;
-    let divSum = 0;
-    while(n>div)
-    {
-        if(n%div === 0)
-        {
-            divSum += div;
-        }
-        div++;
+const n = 28;
+function validatePerfectNumb(n) {
+  let div = 1;
+  let divSum = 0;
+  while (n > div) {
+    if (n % div === 0) {
+      divSum += div;
     }
-    return divSum === n;
+    div++;
+  }
+  return divSum === n;
 }
 console.log(validatePerfectNumb(n));
 
 //Check whether a string is a Palindrome
 const string = "Madam";
-function validatePalindrome(string)
-{
-    let lowerCase = string.toLowerCase();
-    let revStrn = '';
-    for(let i=lowerCase.length-1;i>=0;i--)
-    {
-        revStrn += lowerCase[i];
-    }
-    return lowerCase === revStrn;
+function validatePalindrome(string) {
+  let lowerCase = string.toLowerCase();
+  let revStrn = "";
+  for (let i = lowerCase.length - 1; i >= 0; i--) {
+    revStrn += lowerCase[i];
+  }
+  return lowerCase === revStrn;
 }
 console.log(validatePalindrome(string));
 
@@ -173,23 +144,106 @@ console.log(validatePalindrome(string));
 // but one number is missing.
 // Return the missing number.
 const input = [1, 2, 4, 5];
-function findMissingNumber(input)
-{
-    let sum = 0;
-    let n = input.length+1;
-    let i = 1;
-    while(i<=n)
-    {
-        sum += i;
-        i++;
-    }
-    let arrSum = 0;
-    for(let i=0;i<input.length;i++)
-    {
-        arrSum += input[i];
-    }
-    return sum - arrSum;
+function findMissingNumber(input) {
+  let sum = 0;
+  let n = input.length + 1;
+  let i = 1;
+  while (i <= n) {
+    sum += i;
+    i++;
+  }
+  let arrSum = 0;
+  for (let i = 0; i < input.length; i++) {
+    arrSum += input[i];
+  }
+  return sum - arrSum;
 }
 console.log(findMissingNumber(input));
 
-//118
+//Check if two arrays are equal (same elements & same frequency, order does NOT matter).
+const m = [1, 2, 3, 4];
+const p = [4, 3, 2, 1];
+function validateEqualArray(m, p) {
+  if (m.length !== p.length) return false;
+  let map = {};
+  for (let numb of m) {
+    map[numb] = (map[numb] || 0) + 1;
+  }
+  for (let numb of p) {
+    if (!map[numb]) {
+      return false;
+    }
+    map[numb]--;
+  }
+  for (let key in map) {
+    if (map[key] !== 0) {
+      return false;
+    }
+  }
+  return true;
+}
+console.log(validateEqualArray(m, p));
+
+//119: Find intersection in both arrays
+const a = [3, 5, 7, 9, 2, 3, 5];
+const b = [5, 9, 11];
+function locateIntersection(a, b) {
+  let aSet = new Set(a);
+  let output1 = new Set();
+  for (let numb of b) {
+    if (aSet.has(numb)) {
+      output1.add(numb);
+    }
+  }
+  return [...output1];
+}
+console.log(locateIntersection(a, b));
+
+//120: Find the first non-repeating character in a string.
+const inpStr = "abcabcde";
+function firstNonrepeating(inpStr) {
+  let map = {};
+  for (let char of inpStr) {
+    map[char] = (map[char] || 0) + 1;
+  }
+  for (let char of inpStr) {
+    if (map[char] === 1) {
+      return char;
+    }
+  }
+  return null;
+}
+console.log(firstNonrepeating(inpStr));
+
+//121: Check whether a string is a rotation of another string
+const str1 = "ABCD";
+const str2 = "CDAB";
+function validateStringRotate(str1, str2) {
+  if (str1.length !== str2.length) return false;
+  let doubled = str1 + str1;
+  return doubled.includes(str2);
+}
+console.log(validateStringRotate(str1, str2));
+
+//122 Find the length of longest sequence exist. Ignore order
+const array = [9, 1, 4, 7, 3, -1, 0, 5, 8, -1, 6];
+function longestSequence(array) {
+  let arrSet = new Set(array);
+  let maxLength = 1;
+  for (let num of array) {
+    //// start only if previous number not present
+    if (!arrSet.has(num - 1)) {
+      let length = 1;
+      let current = num;
+      while (arrSet.has(current + 1)) {
+        current++;
+        length++;
+      }
+      maxLength = Math.max(maxLength, length);
+    }
+  }
+  return maxLength;
+}
+console.log(longestSequence(array));
+
+//123
