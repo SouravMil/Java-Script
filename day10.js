@@ -246,4 +246,271 @@ function longestSequence(array) {
 }
 console.log(longestSequence(array));
 
-//123
+//123: Check if a string contains any permutation of another string /////NEED UNDERSTANDING
+const s1 = "ab";
+const s2 = "eidbaoo";
+function validateSubstringPresence(s1, s2) {
+  if (s2.length < s1.length) return false;
+
+  let need = {};
+  let window = {};
+
+  // count characters in s1
+  for (let char of s1) {
+    need[char] = (need[char] || 0) + 1;
+  }
+
+  let left = 0;
+
+  for (let right = 0; right < s2.length; right++) {
+    let char = s2[right];
+
+    // add current character to window
+    window[char] = (window[char] || 0) + 1;
+
+    // keep window size equal to s1.length
+    if (right - left + 1 > s1.length) {
+      let leftChar = s2[left];
+      window[leftChar]--;
+      if (window[leftChar] === 0) {
+        delete window[leftChar];
+      }
+      left++;
+    }
+
+    // compare maps
+    if (right - left + 1 === s1.length) {
+      if (matches(need, window)) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+function matches(map1, map2) {
+  for (let key in map1) {
+    if (map1[key] !== map2[key]) return false;
+  }
+  return true;
+}
+console.log(validateSubstringPresence(s1, s2));
+
+//124: Group Anagrams
+const strArr = ["eat", "tea", "tan", "ate", "nat", "bat"];
+function groupAnagrams(strArr) {
+  let outGroup = {};
+  for (let i = 0; i < strArr.length; i++) {
+    let word = strArr[i];
+    let key = word.split("").sort().join("");
+    if (outGroup[key]) {
+      outGroup[key].push(word);
+    } else {
+      outGroup[key] = [word];
+    }
+  }
+  return Object.values(outGroup);
+}
+console.log(groupAnagrams(strArr));
+
+//125: Valid Parentheses
+//"()"      → true
+// "()[]{}"  → true
+// "(]"      → false
+// "([)]"    → false
+// "{[]}"    → true
+const charSet = "()[]{}";
+function validateLogicalPair(charSet) {
+  let pairs = {
+    ")": "(",
+    "}": "{",
+    "]": "[",
+  };
+  let stack = [];
+  for (let char of charSet) {
+    if (!pairs[char]) {
+      stack.push(char);
+    } else {
+      let top = stack.pop();
+      if (top !== pairs[char]) {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+}
+console.log(validateLogicalPair(charSet));
+
+//125.1: Remove Outer Parentheses
+const inpChar = "(()())(())";
+function removeOuterParentheses(inpChar) {
+  let depth = 0;
+  let result = "";
+  for (let char of inpChar) {
+    if (char === "(") {
+      if (depth > 0) {
+        result += char;
+      }
+      depth++;
+    } else {
+      depth--;
+      if (depth > 0) {
+        result += char;
+      }
+    }
+  }
+  return result;
+}
+console.log(removeOuterParentheses(inpChar));
+
+//125.2: Minimum Add To Make Parentheses Valid
+const paranChar = "()))((";
+function countAdditionforValid(paranChar) {
+  let openNeeded = 0;
+  let closeNeeded = 0;
+  for (let char of paranChar) {
+    if (char === "(") {
+      closeNeeded++;
+    } else {
+      if (closeNeeded > 0) {
+        closeNeeded--;
+      } else {
+        openNeeded++;
+      }
+    }
+  }
+  return openNeeded + closeNeeded;
+}
+console.log(countAdditionforValid(paranChar));
+
+//125.3: Longest Valid Parentheses
+const inpParen = ")()())";
+function longestValid(inpParen) {
+  let isValid = 0;
+  let closeNeed = 0;
+  for (let char of inpParen) {
+    if (char === "(") {
+      closeNeed++;
+    } else {
+      if (closeNeed > 0) {
+        closeNeed--;
+      }
+    }
+  }
+  return (isValid = inpParen.length - closeNeed);
+}
+console.log(longestValid(inpParen));
+
+//126: validate if palindrome
+const strSent = "A man, a plan, a canal: Panama";
+function validatePalindromeString(strSent) {
+  const charArr = strSent
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "")
+    .split("");
+  let charArr2 = [];
+  for (let i = charArr.length - 1; i >= 0; i--) {
+    charArr2.push(charArr[i]);
+  }
+  return charArr.join("") === charArr2.join("");
+}
+console.log(validatePalindromeString(strSent));
+
+// //function validatePalindromeString(strSent)
+// {
+//   let cleaned = strSent
+//     .toLowerCase()
+//     .replace(/[^a-z0-9]/g, '');
+
+//   let left = 0;
+//   let right = cleaned.length - 1;
+
+//   while (left < right)
+//   {
+//     if (cleaned[left] !== cleaned[right])
+//     {
+//       return false;
+//     }
+//     left++;
+//     right--;
+//   }
+
+//   return true;
+// }
+
+//127: First non-repeating character
+const exStr = "loveleetcode";
+function returnIndexofFirstnonRepeatingChar(exStr)
+{
+  let map = {};
+  for(let char of exStr)
+  {
+    map[char] = (map[char]||0)+1
+  }
+  for(let i=0;i<exStr.length;i++)
+  {
+    if(map[exStr[i]] === 1)
+    {
+      return i;
+    }
+  }
+  return -1;
+}
+console.log(returnIndexofFirstnonRepeatingChar(exStr));
+
+///Problem — Longest Substring Without Repeating Characters
+// Task:
+// Given a string s,
+// return the length of the longest substring
+// // that contains no repeating characters.
+const s = "abcabcbb"
+function longestNonrepeatingSubstring(s)
+{
+  let left = 0;
+  let maxLength = 0;
+  let map = {};
+  for(let right=0;right<s.length;right++)
+  {
+    let char = s[right];
+    if(map[char]>=left)
+    {
+      left = map[char]+1;
+    }
+    map[char] = right;
+    maxLength = Math.max(maxLength, right-left+1);
+  }
+  return maxLength;
+}
+console.log(longestNonrepeatingSubstring(s));
+
+//Problem 1 — Longest Substring With At Most 2 Distinct Characters
+const string2 = "eceba";
+function longestSubwith2distinct(string2)
+{
+  let left = 0;
+  let maxLen = 0;
+  let map = {};  
+  for(let right=0;right<string2.length;right++)
+  {
+    let char = string2[right];
+    //increase frequency
+    map[char] = (map[char]||0)+1;
+    //shrink window if more than 2 distinct
+    while(Object.keys(map).length>2)
+    {
+      let leftChar = string2[left];
+      map[leftChar]--;
+
+      if(map[leftChar] === 0)
+      {
+        delete map[leftChar];
+      }
+      left++;
+    }
+    map[char] = right;
+    maxLen = Math.max(maxLen, right-left+1);
+  }
+  return maxLen;
+}
+console.log(longestSubwith2distinct(string2)); 
