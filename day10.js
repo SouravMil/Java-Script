@@ -514,3 +514,100 @@ function longestSubwith2distinct(string2)
   return maxLen;
 }
 console.log(longestSubwith2distinct(string2)); 
+
+//Given an array of integers and a number k, find the maximum sum of any contiguous subarray of size k.
+const numArr1 = [2, 1, 5, 1, 3, 2];
+const l = 3;
+function maxSumofSubArr(numArr1,l)
+{
+  let left = 0;
+  let sum = 0;
+  let maxSum = 0;
+  for(let right=0;right<numArr1.length;right++)
+  {
+     sum += numArr1[right];
+     if(right-left+1 === l)
+     {
+      maxSum = Math.max(maxSum,sum);
+      sum -= numArr1[left];
+      left++;
+     }
+  }
+  return maxSum;
+}
+console.log(maxSumofSubArr(numArr1,l));
+
+//131: Given an array of positive integers and a target number,
+// find the length of the smallest contiguous subarray whose sum is greater than or equal to target.
+// If no such subarray exists, return 0.
+const numArr2 = [2, 3, 1, 2, 4, 3];
+const target = 7;
+function smallestSubArrsum(numArr2,target)
+{
+  let left = 0;
+  let sum = 0;
+  let minLength = Infinity;
+  for(let right=0;right<numArr2.length;right++)
+  {
+    sum += numArr2[right];
+    while(sum>=target)
+    {
+      minLength = Math.min(minLength, right-left+1);
+      sum -= numArr2[left];
+      left++;
+    }
+  }
+  return minLength === Infinity ? 0 : minLength;
+}
+console.log(smallestSubArrsum(numArr2,target))
+
+//132: Given an array of integers and a number k,
+// find the maximum average of any contiguous subarray of size k.
+// Return the average (not the sum).
+const numArr3 = [1, 12, -5, -6, 50, 3];
+const c = 4;
+function maxAverage(numArr3,c)
+{
+  let left = 0;
+  let maxAvg = -Infinity;
+  let sum = 0;
+  for(let right=0;right<numArr3.length;right++)
+  {
+    sum += numArr3[right];
+    if(right-left+1 === c)
+    {
+      let avg = sum/c;
+      maxAvg = Math.max(maxAvg,avg);
+      sum -= numArr3[left];
+      left++
+    }
+  }
+  return maxAvg;
+}
+console.log(maxAverage(numArr3,c));
+
+//133: Problem: Find the first subarray of size k whose sum is exactly equal to target.
+// First Subarray of Size K With Sum = Target. Return the starting index of the subArr.
+const numArr4 = [1, 4, 2, 10, 2, 3, 1, 0, 20];
+const K = 4;
+const bullseye = 18;
+function subarraywithSum(numArr4,K,bullseye)
+{
+  let left=0;
+  let sum = 0;
+  for(let right=0;right<numArr4.length;right++)
+  {
+    sum += numArr4[right];
+    if(right-left+1 === K)
+    {
+      if(sum === bullseye)
+      {
+        return {start:left, end:right};
+      }
+      sum -= numArr4[left];
+      left++
+    }
+  }
+  return -1
+}
+console.log(subarraywithSum(numArr4,K,bullseye))
