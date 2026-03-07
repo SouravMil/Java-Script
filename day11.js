@@ -113,32 +113,143 @@ console.log(longestSubArrwithAtmostzeros(numArr4, K));
 //137: Given an array of positive integers,
 // find the minimum length of a subarray whose sum is ≥ target.
 // If no such subarray exists, return 0.
-const numArr5 = [2,3,1,2,4,3];
+const numArr5 = [2, 3, 1, 2, 4, 3];
 const target5 = 7;
-function smallestSubArr(numArr5,target5)
-{
-    let left = 0;
-    let sum = 0;
-    let smallest = Infinity;
-    for(let right=0;right<numArr5.length;right++)
-    {
-        sum += numArr5[right];
-        while(sum >= target5)
-        {
-            smallest = Math.min(smallest,right-left+1);
-            sum -= numArr5[left];
-            left++;
-        }
+function smallestSubArr(numArr5, target5) {
+  let left = 0;
+  let sum = 0;
+  let smallest = Infinity;
+  for (let right = 0; right < numArr5.length; right++) {
+    sum += numArr5[right];
+    while (sum >= target5) {
+      smallest = Math.min(smallest, right - left + 1);
+      sum -= numArr5[left];
+      left++;
     }
-    return smallest === Infinity ? 0 : smallest;
+  }
+  return smallest === Infinity ? 0 : smallest;
 }
-console.log(smallestSubArr(numArr5,target5));
+console.log(smallestSubArr(numArr5, target5));
 
-//138: Given a string, find the length of the 
+//138: Given a string, find the length of the
 // longest substring that contains at most K distinct characters.
 const s = "eceba";
 const p = 2;
-function longestSubstring(s,p)
-{
-    
+function longestSubstring(s, p) {
+  let left = 0;
+  let freq = {};
+  let longest = -Infinity;
+  for (let right = 0; right < s.length; right++) {
+    let char = s[right];
+    freq[char] = (freq[char] || 0) + 1;
+    while (Object.keys(freq).length > p) {
+      let leftChar = s[left];
+      freq[leftChar]--;
+      if (freq[leftChar] === 0) {
+        delete freq[leftChar];
+      }
+      left++;
+    }
+    longest = Math.max(longest, right - left + 1);
+  }
+  return longest;
 }
+console.log(longestSubstring(s, p));
+
+//Given a string s, find the length of the longest substring with no repeating characters.
+const s1 = "abcabcbb";
+function longestSubstringNorepeat(s1) {
+  let left = 0;
+  let freq = {};
+  let longest = -Infinity;
+  for (let right = 0; right < s1.length; right++) {
+    let char = s1[right];
+    freq[char] = (freq[char] || 0) + 1;
+    while (freq[char] > 1) {
+      let leftChar = s1[left];
+      freq[leftChar]--;
+      left++;
+    }
+    longest = Math.max(longest, right - left + 1);
+  }
+  return longest;
+}
+console.log(longestSubstringNorepeat(s1));
+
+//140: Given a string s, find the length of the longest substring that contains at most 2 distinct characters.
+const s2 = "ccaabbb";
+const k3 = 2;
+function logestSubstring2distinct(s2, k3) {
+  let left = 0;
+  let longest = 0;
+  let freq = {};
+  for (let right = 0; right < s2.length; right++) {
+    let char = s2[right];
+    freq[char] = (freq[char] || 0) + 1;
+    while (Object.keys(freq).length > k3) {
+      let leftChar = s2[left];
+      freq[leftChar]--;
+      if (freq[leftChar] === 0) {
+        delete freq[leftChar];
+      }
+      left++;
+    }
+    longest = Math.max(longest, right - left + 1);
+  }
+  return longest;
+}
+console.log(logestSubstring2distinct(s2, k3));
+
+//Given a string s and an integer k, return the length of the
+//longest substring that contains exactly k distinct characters.
+//If no such substring exists, return 0.
+const s4 = "aabacbebebe";
+const k4 = 3;
+function longestSubstringwithKdistinct(s4, k4) {
+  let left = 0;
+  let freq = {};
+  let longest = 0;
+  for (let right = 0; right < s4.length; right++) {
+    let char = s4[right];
+    freq[char] = (freq[char] || 0) + 1;
+    while (Object.keys(freq).length > k4) {
+      let leftChar = s4[left];
+      freq[leftChar]--;
+      if (freq[leftChar] === 0) {
+        delete freq[leftChar];
+      }
+      left++;
+    }
+    if (Object.keys(freq).length === k4) {
+      longest = Math.max(longest, right - left + 1);
+    }
+  }
+  return longest;
+}
+console.log(longestSubstringwithKdistinct(s4, k4));
+
+//142: Given a string s and integer k, count how many substrings contain at most k distinct characters.
+//Return the total number of such substrings.
+const str = "abc";
+const P = 2;
+function countOfSubstring(str, P) {
+  let left = 0;
+  let freq = {};
+  let counter = 0;
+  for (let right = 0; right < str.length; right++) {
+    let char = str[right];
+    freq[char] = (freq[char] || 0) + 1;
+    while (Object.keys(freq).length > P) {
+      let leftChar = str[left];
+      freq[leftChar]--;
+      if(freq[leftChar]===0)
+      {
+        delete freq[leftChar];
+      }
+      left++
+    }
+    counter += right-left+1;
+  }
+  return counter;
+}
+console.log(countOfSubstring(str, P));
