@@ -242,14 +242,58 @@ function countOfSubstring(str, P) {
     while (Object.keys(freq).length > P) {
       let leftChar = str[left];
       freq[leftChar]--;
-      if(freq[leftChar]===0)
-      {
+      if (freq[leftChar] === 0) {
         delete freq[leftChar];
       }
-      left++
+      left++;
     }
-    counter += right-left+1;
+    counter += right - left + 1;
   }
   return counter;
 }
 console.log(countOfSubstring(str, P));
+
+//143: Given two strings: Find all starting indices of substrings in s that are anagrams of p.
+//Return the indices.
+const S = "cbaebabacd";
+const pattern = "abc";
+function isEqual(obj1,obj2)
+{
+  let keys1 = Object.keys(obj1);
+  let keys2 = Object.keys(obj2);
+
+  if(keys1.length !== keys2.length) return false;
+
+  for(let key of keys1)
+  {
+    if(obj1[key] !== obj2[key]) return false;
+  }
+  return true;
+}
+
+function findIndexofAnagrams(S, pattern) {
+  let left = 0;
+  let result = [];
+  let freqPattern = {};
+  let window = {};
+  for (let char of pattern) {
+    freqPattern[char] = (freqPattern[char] || 0) + 1;
+  }
+  for (let right = 0; right < S.length; right++) {
+    let rightChar = S[right];
+    window[rightChar] = (window[rightChar] || 0) + 1;
+    if (right - left + 1 === pattern.length) {
+      if (isEqual(window,freqPattern)) {
+        result.push(left);
+      }
+      let leftChar = S[left];
+      window[leftChar]--;
+      if (window[leftChar] === 0) {
+        delete window[leftChar];
+      }
+      left++;
+    }
+  }
+  return result;
+}
+console.log(findIndexofAnagrams(S, pattern));
