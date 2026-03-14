@@ -257,16 +257,14 @@ console.log(countOfSubstring(str, P));
 //Return the indices.
 const S = "cbaebabacd";
 const pattern = "abc";
-function isEqual(obj1,obj2)
-{
+function isEqual(obj1, obj2) {
   let keys1 = Object.keys(obj1);
   let keys2 = Object.keys(obj2);
 
-  if(keys1.length !== keys2.length) return false;
+  if (keys1.length !== keys2.length) return false;
 
-  for(let key of keys1)
-  {
-    if(obj1[key] !== obj2[key]) return false;
+  for (let key of keys1) {
+    if (obj1[key] !== obj2[key]) return false;
   }
   return true;
 }
@@ -283,7 +281,7 @@ function findIndexofAnagrams(S, pattern) {
     let rightChar = S[right];
     window[rightChar] = (window[rightChar] || 0) + 1;
     if (right - left + 1 === pattern.length) {
-      if (isEqual(window,freqPattern)) {
+      if (isEqual(window, freqPattern)) {
         result.push(left);
       }
       let leftChar = S[left];
@@ -297,3 +295,89 @@ function findIndexofAnagrams(S, pattern) {
   return result;
 }
 console.log(findIndexofAnagrams(S, pattern));
+
+//144: Return all anagram indices.
+const S1 = "abab";
+const pattern1 = "ab";
+
+function isEqlObj(obj1, obj2) {
+  let key1 = Object.keys(obj1);
+  let key2 = Object.keys(obj2);
+  if (key1.length !== key2.length) return false;
+  for (let key of key1) {
+    if (obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function anagramIndices(S1, pattern1) {
+  let left = 0;
+  let freqPatt = {};
+  let window = {};
+  let result = [];
+  for (let char of pattern1) {
+    freqPatt[char] = (freqPatt[char] || 0) + 1;
+  }
+  for (let right = 0; right < S1.length; right++) {
+    let rightChar = S1[right];
+    window[rightChar] = (window[rightChar] || 0) + 1;
+    if (right - left + 1 === pattern1.length) {
+      if (isEqlObj(freqPatt, window)) {
+        result.push(left);
+      }
+      let leftChar = S1[left];
+      window[leftChar]--;
+      if (window[leftChar] === 0) {
+        delete window[leftChar];
+      }
+      left++;
+    }
+  }
+  return result;
+}
+console.log(anagramIndices(S1, pattern1));
+
+//145: Modify your function so it returns the actual substrings instead of indices.
+const strng = "abab";
+const design = "ab";
+
+function objEql(obj1, obj2) {
+  let key1 = Object.keys(obj1);
+  let key2 = Object.keys(obj2);
+  if (key1.length !== key2.length) return false;
+  for (let key of key1) {
+    if (obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function anagramSubstring(strng, design) {
+  let left = 0;
+  let result = [];
+  let freqPatt = {};
+  let window = {};
+  for (let char of design) {
+    freqPatt[char] = (freqPatt[char] || 0) + 1;
+  }
+  for (let right = 0; right < strng.length; right++) {
+    let rightChar = strng[right];
+    window[rightChar] = (window[rightChar] || 0) + 1;
+    if (right - left + 1 === design.length) {
+      if (objEql(window, freqPatt)) {
+        result.push(strng.substring(left, right + 1));
+      }
+      let leftChar = strng[left];
+      window[leftChar]--;
+      if (window[leftChar] === 0) {
+        delete window[leftChar];
+      }
+      left++;
+    }
+  }
+  return result;
+}
+console.log(anagramSubstring(strng, design));
