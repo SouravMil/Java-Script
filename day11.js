@@ -381,3 +381,56 @@ function anagramSubstring(strng, design) {
   return result;
 }
 console.log(anagramSubstring(strng, design));
+
+//146: Given a string, find the length of the longest substring with at most K distinct characters.
+const a = "eceba";
+const L = 2;
+function longestSubstring(a, L) {
+  let left = 0;
+  let map = {};
+  let longest = 0;
+  for (let right = 0; right < a.length; right++) {
+    let rightChar = a[right];
+    map[rightChar] = (map[rightChar] || 0) + 1;
+    while (Object.keys(map).length > L) {
+      let leftChar = a[left];
+      map[leftChar]--;
+      if (map[leftChar] === 0) {
+        delete map[leftChar];
+      }
+      left++;
+    }
+    longest = Math.max(longest, right - left + 1);
+  }
+  return longest;
+}
+console.log(`The longest sub-string is: ${longestSubstring(a, L)}`);
+
+//147: Find the longest substring with at most K distinct characters
+// BUT return the substring (not length).
+const B = "eceba";
+const A = 2;
+function returnSubstring(B, A) {
+  let left = 0;
+  let map = {};
+  let longest = 0;
+  let result = "";
+  for (let right = 0; right < B.length; right++) {
+    let rightChar = B[right];
+    map[rightChar] = (map[rightChar] || 0) + 1;
+    while (Object.keys(map).length > A) {
+      let leftChar = B[left];
+      map[leftChar]--;
+      if (map[leftChar] === 0) {
+        delete map[leftChar];
+      }
+      left++;
+    }
+    if (right - left + 1 > longest) {
+      longest = right - left + 1;
+      result = B.substring(left, right + 1);
+    }
+  }
+  return result;
+}
+console.log(`Printing the longest sub-string: ${returnSubstring(B, A)}`);
